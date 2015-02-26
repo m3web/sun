@@ -40,7 +40,7 @@ function showInfo(el, desc) {
 
     g.innerHTML = '';
 
-    pattern.setAttribute('patternTransform', 'scale(' + (1.0 / scaleFactor) + ')');
+    pattern.setAttribute('patternTransform', 'scale(' + (1.0 / scaleFactor) + ') rotate(45)');
 
     newEl.setAttribute('id', el.getAttribute('id') + '_thumbnail');
     newEl.setAttribute('fill', 'url(#pattern)');

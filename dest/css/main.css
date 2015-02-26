@@ -22,6 +22,20 @@
   font-weight: normal;
   font-style: normal;
 }
+::-webkit-input-placeholder {
+  color: #826136;
+}
+::-moz-placeholder {
+  color: #826136;
+}
+/* Firefox 19+ */
+:-moz-placeholder {
+  color: #826136;
+}
+/* Firefox 18- */
+:-ms-input-placeholder {
+  color: #826136;
+}
 html {
   padding: 0;
   margin: 0;
@@ -38,7 +52,6 @@ body {
 }
 .b-main {
   position: relative;
-  background: url(../../images/back1.png) no-repeat top left;
 }
 .b-header {
   position: relative;
@@ -182,10 +195,10 @@ body {
 }
 .b-info {
   position: relative;
-  background: url(../../images/back2.png) no-repeat left top;
   padding: 50px;
   padding-bottom: 230px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .b-info__header {
   text-align: center;
@@ -227,8 +240,10 @@ body {
 }
 .b-bullet__icon {
   width: 180px;
+  z-index: 2;
 }
 .b-bullet__text {
+  font-size: 0.9em;
   margin-top: -90px;
   background: #f9e48f;
   padding: 90px 20px 0;
@@ -246,16 +261,16 @@ body {
   bottom: 0;
   right: 0;
   background: url(../../images/chehov.png) no-repeat right bottom;
-  height: 175px;
-  width: 233px;
+  height: 262px;
+  width: 349px;
 }
 .b-chehov__text {
   position: absolute;
   bottom: 30px;
-  right: 100px;
-  width: 100px;
-  top: 110px;
-  font-size: 14px;
+  right: 135px;
+  width: 180px;
+  top: 180px;
+  font-size: 0.8em;
 }
 .b-active {
   position: relative;
@@ -342,6 +357,7 @@ body {
   display: inline-block;
   margin-top: 50px;
   max-width: 900px;
+  vertical-align: top;
 }
 .b-is-icon {
   display: inline-block;
@@ -350,6 +366,7 @@ body {
   color: white;
   padding: 0 10px;
   margin-bottom: 20px;
+  vertical-align: top;
 }
 .b-is-icon__img {
   width: 150px;
@@ -358,10 +375,10 @@ body {
 }
 .b-is-ison__text {
   display: inline;
+  vertical-align: top;
 }
 .b-callback {
   position: relative;
-  background: url(../../images/back3.png);
   height: 611px;
 }
 .b-form__girl {
