@@ -1,0 +1,510 @@
+// Colors
+@brown: #826136;
+@orange: #f7b94b;
+@yellow: #f9e48f;
+
+// Fonts
+@font-face {
+    font-family: 'Intro Cond';
+    src: url('../../fonts/intro-cond-black-free-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Intro Cond';
+    src: url('../../fonts/intro-cond-light-free-webfont.woff') format('woff');
+    font-weight: lighter;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../../fonts/proximanova-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../../fonts/opensans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Mixins
+// ............................................................
+// .for
+
+.for(@i, @n) {.-each(@i)}
+.for(@n)     when (isnumber(@n)) {.for(1, @n)}
+.for(@i, @n) when not (@i = @n)  {
+    .for((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+// ............................................................
+// .for-each
+
+.for(@array)   when (default()) {.for-impl_(length(@array))}
+.for-impl_(@i) when (@i > 1)    {.for-impl_((@i - 1))}
+.for-impl_(@i) when (@i > 0)    {.-each(extract(@array, @i))}
+
+
+.header(@size: 40px) {
+    text-transform: uppercase;
+    font-size: @size;
+    font-family: 'Intro Cond', sans-serif;
+    font-weight: bold;
+}
+
+.long-shadow(@type, @size, @color, @depth: 10%, @fade: 0%) {
+    .for(@size); .-each(@i) {
+        @x: 1px * @i;
+        @y: 1px * @i;
+        @a: pow(1 - (@i - 1) / @size, .02 * @fade);
+        @c: darken(@color, @depth * @a);
+        @{type}-shadow+: @x @y @c;
+    }
+}
+
+// Common
+html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: @yellow;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    max-width: 1400px;
+    min-width: 1240px;
+    margin: 0 auto;
+    box-shadow: 0 0 15px black;
+}
+
+// Blocks
+.b-main {
+    position: relative;
+    background: url(../../images/back1.png) no-repeat top left;
+}
+
+.b-header {
+    position: relative;
+    background: url(../../images/header.png) no-repeat top left;
+    height: 206px;
+}
+.b-header__logo {
+    position: absolute;
+    top: 15px;
+    left: 200px;
+}
+.b-header__phone {
+    position: absolute;
+    right: 100px;
+    top: 35px;
+    color: white;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-family: 'Proxima Nova', sans-serif;
+    font-weight: bold;
+}
+
+.b-menu {
+    position: absolute;
+    top: 120px;
+    left: 115px;
+    font-family: 'Intro Cond', sans-serif;
+    font-weight: lighter;
+    text-align: left;
+}
+.b-menu__item {
+    position: absolute;
+    color: @brown;
+    text-decoration: none;
+    display: inline-block;
+    // margin-right: 30px;
+    font-size: 12px;
+    text-transform: uppercase;
+    bottom: -18px;
+}
+.b-gallery {
+    max-width: 1240px;
+    margin: auto;
+}
+#a {
+    min-width: 70px;
+    left: 12px;
+}
+#g {
+    left: 118px;
+}
+#p {
+    left: 215px;
+}
+#s {
+    left: 335px;
+}
+#c {
+    left: 466px;
+}
+.b-main {
+    text-align: center;
+}
+
+.b-offer {
+    display: inline-block;
+    background: url(../../images/circ.png) no-repeat top left;
+    padding-left: 240px;
+    box-sizing: border-box;
+    min-height: 300px;
+    vertical-align: top;
+    padding-bottom: 50px;
+    text-align: left;
+}
+.b-offer__content {
+    display: inline-block;
+}
+.b-offer__header {
+    color: @brown;
+    width: 300px;
+    .header();
+}
+.b-offer__text {
+    margin-top: 50px;
+    color: white;
+    width: 300px;
+}
+.b-offer__ground {
+    vertical-align: top;
+    width: 300px;
+    margin-left: 1px;
+}
+.b-counter {
+    margin-top: 70px;
+}
+.b-counter__digits {
+    background: url(../../images/digits.png) no-repeat left center;
+    color: @brown;
+    font-weight: bold;
+    font-size: 60px;
+    padding: 10px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.b-counter__text {
+    display: inline-block;
+    font-size: 30px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-family: 'Intro Cond', sans-serif;
+    font-weight: lighter;
+}
+.b-why {
+    background: @orange;
+    padding: 50px 0;
+    text-align: center;
+    overflow: hidden;
+}
+.b-why__header {
+    text-align: center;
+    color: white;
+    .header();
+}
+.b-why-icon {
+    display: inline-block;
+    width: 300px;
+}
+.b-why-icon__icon {
+    margin-left: -75px;
+    width: 450px;
+}
+.b-why-icon__text {
+    color: white;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-top: -50px;
+}
+
+.b-info {
+    position: relative;
+    background: url(../../images/back2.png) no-repeat left top;
+    padding: 50px;
+    padding-bottom: 230px;
+    box-sizing: border-box;
+}
+.b-info__header {
+    text-align: center;
+}
+
+.b-info-entry {
+    color: white;
+    display: inline-block;
+    margin-right: 50px;
+    text-align: left;
+}
+
+.b-info-entry__header {
+    font-size: 50px;
+    font-weight: bold;
+}
+.b-info-entry__text {
+    font-size: 16px;
+}
+
+.b-info-map {
+    position: relative;
+    margin-top: 50px;
+}
+
+.b-info-map__map {
+    width: 450px;
+}
+.b-info-map__entry {
+    position: absolute;
+}
+
+.b-bullets {
+    position: absolute;
+    right: 75px;
+    top: 190px;
+}
+
+@bullet-width: 180px;
+.b-bullet {
+    color: @brown;
+    width: @bullet-width;
+    margin-right: 25px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.b-bullet__icon {
+    width: @bullet-width;
+}
+
+.b-bullet__text {
+    margin-top: -@bullet-width / 2;
+    background: @yellow;
+    padding: @bullet-width / 2 20px 0;
+}
+
+.b-bullet__halfcirc {
+    width: @bullet-width;
+    height: @bullet-width;
+    border-radius: 50%;
+    background: @yellow;
+    margin-top: -@bullet-width / 2;
+}
+
+.b-chehov {
+    color: @brown;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: url(../../images/chehov.png) no-repeat right bottom;
+    height: 175px;
+    width: 233px;
+}
+
+.b-chehov__text {
+    position: absolute;
+    bottom: 30px;
+    right: 100px;
+    width: 100px;
+    top: 110px;
+    font-size: 14px;
+}
+
+@realmap-height: 500px;
+.b-active {
+    position: relative;
+    height: @realmap-height;
+    background: @orange;
+    overflow: hidden;
+}
+
+.b-active__realmap {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    z-index: 10;
+}
+
+.b-active__map {
+    position: absolute;
+    top: 0;
+    left: 50px;
+    height: @realmap-height;
+    width: 50%;
+}
+
+#Plan1 .active {
+    fill: #A6FFA1;
+}
+
+.b-active__scheme {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    text-align: center;
+    width: 600px;
+    padding-bottom: 20px;
+}
+
+.b-active__area {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+}
+
+.b-active__desc {
+    width: 400px;
+    display: inline-block;
+    text-align: left;
+    color: white;
+}
+.b-active__text {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+.b-active__div {
+    border: none;
+    height: 2px;
+    background: white;
+}
+.b-active__cost {
+    font-size: 80px;
+    font-weight: bold;
+    font-family: 'Intro Cond', sans-serif;
+}
+.b-active__costdesc {
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+}
+.b-active__button {
+    margin-left: 10px;
+    // float: right;
+}
+
+.b-is {
+    text-align: center;
+    background: url(../../images/pattern.png);
+}
+.b-is__content {
+    background: @orange;
+    display: inline-block;
+    padding: 50px 0;
+}
+.b-is__header {
+    color: white;
+    .header();
+}
+.b-is__icons {
+    display: inline-block;
+    margin-top: 50px;
+    max-width: 900px;
+}
+
+.b-is-icon {
+    display: inline-block;
+    width: 400px;
+    text-align: left;
+    color: white;
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+.b-is-icon__img {
+    width: 150px;
+    vertical-align: top;
+    float: left;
+}
+.b-is-ison__text {
+    display: inline;
+}
+
+.b-callback {
+    position: relative;
+    background: url(../../images/back3.png);
+    height: 611px;
+}
+.b-form__girl {
+    position: absolute;
+    top: -50px;
+    z-index: 5;
+}
+.b-form {
+    position: absolute;
+    z-index: 10;
+    top: 160px;
+    left: 580px;
+    width: 300px;
+    text-align: center;
+}
+.b-form__header {
+    color: white;
+    .header(25px);
+}
+.b-form__div {
+    border: none;
+    height: 2px;
+    background: white;
+}
+.b-form__field {
+    width: 90%;
+    border: none;
+    outline: none;
+    background: @yellow;
+    margin-top: 15px;
+    padding: 5px 20px;
+    font-size: 16px;
+    &:focus {
+        background: white;
+    }
+}
+.b-form__button {
+    margin-top: 10px;
+}
+input, textarea {
+    box-sizing: border-box;
+}
+.b-path {
+    color: @brown;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-right: 300px;
+    box-sizing: border-box;
+    background: white;
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.b-path__how {
+    text-transform: uppercase;
+    font-size: 24px;
+}
+
+.b-road {
+    width: 100%;
+    margin-top: -5px;
+}
+
+.button {
+    border: 3px white solid;
+    border-radius: 3px;
+    background: @yellow;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: 'Intro Cond', sans-serif;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    padding: 5px 30px;
+    .long-shadow(box, 25, @orange, 20%, 75%);
+}
